@@ -1,0 +1,389 @@
+//  Variables
+$whatsapp-color: #25d366;
+$white: #ffffff;
+$black: #000000;
+$font-main: "Rajdhani", sans-serif;
+
+//  Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin responsive-text($size, $align: left, $color: $white) {
+  font-size: $size;
+  text-align: $align;
+  color: $color;
+}
+
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin grid($columns, $rows, $gap: 10px) {
+  display: grid;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+  gap: $gap;
+}
+
+//  Reset
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+//  Botón flotante WhatsApp
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  background-color: $whatsapp-color;
+  bottom: 40px;
+  right: 40px;
+  color: $white;
+  border-radius: 50%;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 999;
+
+  .fa-whatsapp {
+    font-size: 55px;
+  }
+
+  &:hover {
+    background-color: $whatsapp-color;
+  }
+}
+
+//  Body
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: $font-main;
+  font-weight: 700;
+  font-style: normal;
+  background-color: $black;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+//  Menú
+.menu {
+  ul {
+    @include flex-center;
+    justify-content: space-around;
+    box-shadow: 6px 7px 7px rgba(81, 3, 207, 0.3);
+  }
+
+  li {
+    margin-right: 1.5rem;
+
+    &:last-child {
+      background-color: $white;
+      border: 2px solid $white;
+      padding: .25rem .75rem;
+      border-radius: .2rem;
+
+      &:hover {
+        background: transparent;
+        border: 2px solid $white;
+      }
+    }
+  }
+
+  a {
+    color: rgb(37, 37, 231);
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+.menu-list {
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+
+    li {
+      margin: 10px 0;
+    }
+  }
+}
+
+//  Main
+main {
+  flex: 1;
+}
+
+//  Footer
+footer {
+  position: relative;
+  width: 100%;
+  background-color: rgb(39, 39, 39);
+  min-height: 100px;
+  padding: 20px 50px;
+  @include flex-center;
+  justify-content: space-between;
+
+  @include mobile {
+    flex-direction: column;
+  }
+
+  .social-icon {
+    @include flex-center;
+    position: relative;
+    margin: 10px 5px;
+    flex-wrap: wrap;
+
+    .icon-elem {
+      list-style: none;
+
+      .icon {
+        color: $white;
+        font-size: 28px;
+        margin: 0 10px;
+        transition: 0.5s;
+
+        &:hover {
+          transform: translateY(-10px);
+        }
+      }
+    }
+  }
+
+  .footermenu {
+    @include flex-center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+
+    .menu-elem {
+      list-style: none;
+
+      .menu-icon {
+        color: $white;
+        font-size: 20px;
+        margin: 5px 10px;
+        opacity: 0.75;
+        transition: 0.3s;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .textfooter {
+    color: $white;
+    text-align: center;
+    margin: 15px 0 10px;
+    font-size: 20px;
+  }
+}
+
+//  Video embed
+#videodecuhillo {
+  text-align: center;
+  margin: 40px auto;
+  max-width: 600px;
+
+  iframe {
+    width: 100%;
+    height: 350px;
+    border: none;
+  }
+}
+
+//  Video alternativo (miniatura + botón)
+.video-fake {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+
+  img {
+    @include responsive-text(0); // Solo para no romper layout
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  a {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    color: white;
+    background: rgba(0,0,0,0.6);
+    border-radius: 50%;
+    padding: 20px 30px;
+    transition: 0.3s;
+
+    &:hover {
+      background: rgba(255,0,0,0.8);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+}
+
+// Tipografía general
+a { text-decoration: none; }
+
+h1, h2, h3, h4 {
+  @include responsive-text(30px, center, $white);
+}
+
+h1 { text-align: left; }
+
+p {
+  color: $white;
+  font-size: 20px;
+  margin: 30px;
+
+  @include mobile {
+    text-align: center;
+  }
+}
+
+// Contenedores
+.contenedor { text-align: center; }
+.navegadoresinternos { margin: 5% auto; }
+
+// Listas
+ul {
+  font-size: 25px;
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+
+  li {
+    color: $white;
+    display: grid;
+    place-content: center;
+  }
+}
+
+// Logo
+.logodenosotros {
+  @include flex-center;
+
+  .logo-2 {
+    margin: 60px;
+  }
+}
+
+// Mapa
+.mapa {
+  @include mobile {
+    max-width: 80%;
+    padding-top: 75%;
+  }
+}
+
+// Formulario
+label {
+  color: #050505;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+input, textarea {
+  padding: 17px 25px;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  background-color: #050505;
+  border: 2px solid #1b1d1b;
+  color: #283629;
+  outline: none;
+
+  &::placeholder { color: $black; }
+}
+
+.form-txt {
+  margin-bottom: 30px;
+  display: flex;
+  text-align: center;
+
+  a { color: #070606; font-weight: 14px; text-decoration: none; }
+}
+
+.btn {
+  font-size: 25px;
+  color: #141414;
+  border-radius: 25px;
+  background-color: #51D94C;
+  box-shadow: 0 0 20px rgba(25, 254, 0, 0.4);
+  cursor: pointer;
+}
+
+// About
+.about {
+  margin: 80px auto;
+  width: 90%;
+  height: 800px;
+  max-width: 1300px;
+  outline: 4px solid;
+  border: 5px solid $white;
+  @include grid(repeat(6,1fr), repeat(6,1fr));
+
+  &__img { grid-column: 1/5; grid-row: 1/3; }
+  &__img2 { grid-column: 1/5; grid-row: 3/5; }
+  &__img3 { grid-column: 1/5; grid-row: 5/7; }
+  &__img5 { grid-column: 5/7; grid-row: 1/7; }
+}
+
+// Modelos
+.nuestrosmodelos, .nuestrosmodelos2 {
+  font-size: 40px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+// Grid área
+.gridarea {
+  background-color: $white;
+  align-items: center;
+  @include grid(repeat(4,1fr), repeat(3,200px), 10px);
+  margin: 80px auto;
+  width: 80vw;
+  height: 64vh;
+
+  img { width: 90%; height: 90%; object-fit: cover; }
+
+  .imagengrid1 { grid-area: imagengrid1; }
+  .imagengrid2 { grid-area: imagengrid2; }
+  .imagengrid3 { grid-area: imagengrid3; }
+  .imagengrid4 { grid-area: imagengrid4; }
+  .imagengrid5 { grid-area: imagengrid5; }
+  .imagengrid6 { grid-area: imagengrid6; }
+}
+
+// Galería
+.gallery-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover { transform: scale(1.05); }
+}
